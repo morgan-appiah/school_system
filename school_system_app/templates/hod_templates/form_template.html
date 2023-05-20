@@ -1,0 +1,65 @@
+<form role="form" action="{{ action_path }}" method="post" enctype="multipart/form-data" class="form-sample">
+    {% csrf_token %}
+    <div class="card-body">
+        {% for field in form %}
+        <div class="form-group">
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+        {% endfor %}
+        <div class="form-group">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+            {% endif %}
+            {% if message.tags == 'success' %}
+            <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary btn-block">{{ button_text }}</button>
+    </div>
+</form>
+
+<form role="form" action="{{ action_path }}" method="post" enctype="multipart/form-data" class="form-sample">
+    {% csrf_token %}
+    <p class="card-description">
+          <b>*Personal info</b>
+      </p>
+     {% for field in form %}
+        <div class="form-group">
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+        {% endfor %}
+
+      <div class="form-group row">
+      <p class="card-description">
+          <b>*Transactional info</b>
+      </p>
+      </div>
+
+      <div class="form-group">
+      {% if messages %}
+      <div class="col-12">
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+        {% endif %}
+        {% if message.tags == 'success' %}
+        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+        {% endif %}
+        {% endfor %}
+      </div>
+        {% endif %}
+      <button type="submit" class="btn btn-primary me-2">Submit</button>
+      <button type="reset" class="btn btn-light">Cancel</button>
+      </div>
+    </form>
