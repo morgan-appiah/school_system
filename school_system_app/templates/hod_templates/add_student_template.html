@@ -199,7 +199,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Mother Name</label>
                           <div class="col-sm-9">
-                            <input type="password" class="form-control" placeholder="Mother Name" name="mother">
+                            <input type="text" class="form-control" placeholder="Mother Name" name="mother">
                           </div>
                         </div>
                       </div>
@@ -348,7 +348,7 @@
                           <div class="col-sm-9">
                             <select class="form-control" name="session_year">
                               {% for session_year in session_year_id %}
-                               <option value="{{ session_year.id }}">{{ session_year.session_year_start }} TO {{ session_year.session_year_end }}</option>
+                               <option value="{{ session_year.id }}">{{ session_year.session_start_year }} -- {{ session_year.session_start_year }}</option>
                               {% endfor %}
                             </select>
                           </div>

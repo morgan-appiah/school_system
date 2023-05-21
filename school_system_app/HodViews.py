@@ -335,7 +335,7 @@ def add_student_save(request):
         user.student.course = course
         user.student.stage = stage
         user.student.staff = staff
-        user.student.session_year = session_year
+        user.student.session_year = SessionYearModel(session_year_id=session_year)
         user.student.profile_pic = profile_pic_url
         user.save()
         messages.success(request, "Successfully Added Student")
