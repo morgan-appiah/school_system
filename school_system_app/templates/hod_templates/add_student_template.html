@@ -347,7 +347,7 @@
                           <label class="col-sm-3 col-form-label">Semester/Session</label>
                           <div class="col-sm-9">
                             <select class="form-control" name="session_year">
-                              {% for session_year in session_year_id %}
+                              {% for session_year in session_years %}
                                <option value="{{ session_year.id }}">{{ session_year.session_start_year }} -- {{ session_year.session_start_year }}</option>
                               {% endfor %}
                             </select>

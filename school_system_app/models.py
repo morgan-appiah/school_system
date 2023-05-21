@@ -149,7 +149,7 @@ class Student(models.Model):
     academic_tutor=models.ForeignKey(Staff, on_delete=models.DO_NOTHING)
     course_id=models.ForeignKey(Courses,on_delete=models.DO_NOTHING)
     stage_id=models.ForeignKey(Stages, on_delete=models.CASCADE)
-    session_year_id=models.ForeignKey(SessionYearModel,on_delete=models.CASCADE)
+    session_year_id=models.ForeignKey(SessionYearModel,on_delete=models.CASCADE,default=1)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now_add=True)
     fcm_token=models.TextField(default="")
@@ -402,8 +402,7 @@ def create_user_profile(sender,instance,created,**kwargs):
             Staff.objects.create(admin=instance,address="",profile_pic="",contact="",puk="", bank_name="",
                                  bank_account="",ezwich="",momo_number="")
         if instance.user_type==3:
-            Student.objects.create(admin=instance,course_id=Courses.objects.get(id=1),
-                                   session_year_id=SessionYearModel.objects.get(id=1),address="",
+            Student.objects.create(admin=instance,course_id=Courses.objects.get(id=1),address="",
                                    profile_pic="",gender="",contact="",emergency_contact="",nationality="",
                                    religion="",nonclass_activity="",previous_health="",previous_school="",
                                    mother="",father="",academic_tutor=Staff.objects.get(id=1),

@@ -259,9 +259,9 @@ def add_stage_save(request):
 def add_student(request):
     courses=Courses.objects.all()
     stages=Stages.objects.all()
-    session_year_id=SessionYearModel.objects.all()
+    session_years=SessionYearModel.objects.all()
     staffs=CustomUser.objects.filter(user_type=2)
-    return render(request, "hod_templates/add_student_template.html",{"staffs":staffs,"courses":courses,"stages":stages,"session_year_id":session_year_id})
+    return render(request, "hod_templates/add_student_template.html",{"staffs":staffs,"courses":courses,"stages":stages,"session_years":session_years})
 
 
 def add_student_save(request):
@@ -301,7 +301,10 @@ def add_student_save(request):
         stage_id = request.POST.get("stage")
         stage = Stages.objects.get(id=stage_id)
         session_year_id = request.POST.get("session_year")
-        session_year = SessionYearModel.objects.get(id=session_year_id)
+        try:
+            session_year = SessionYearModel.objects.get(id=session_year_id)
+        except SessionYearModel.DoesNotExist:
+            session_year = None
 
         profile_pic = request.FILES['profile_pic']
         fs = FileSystemStorage()
@@ -335,7 +338,7 @@ def add_student_save(request):
         user.student.course = course
         user.student.stage = stage
         user.student.staff = staff
-        user.student.session_year = SessionYearModel(session_year_id=session_year)
+        user.student.session_year = session_year
         user.student.profile_pic = profile_pic_url
         user.save()
         messages.success(request, "Successfully Added Student")
