@@ -258,9 +258,10 @@ def add_stage_save(request):
 
 def add_student(request):
     courses=Courses.objects.all()
-    subjects=Subjects.objects.all()
+    stages=Stages.objects.all()
+    session_year_id=SessionYearModel.objects.all()
     staffs=CustomUser.objects.filter(user_type=2)
-    return render(request, "hod_templates/add_student_template.html",{"staffs":staffs,"courses":courses,"subjects":subjects})
+    return render(request, "hod_templates/add_student_template.html",{"staffs":staffs,"courses":courses,"stages":stages,"session_year_id":session_year_id})
 
 
 def add_student_save(request):
@@ -274,41 +275,71 @@ def add_student_save(request):
         password = request.POST.get("password")
         address = request.POST.get("address")
         admission_number = request.POST.get("admission_number")
-        qualification = request.POST.get("qualification")
-        role = request.POST.get("role")
-        department = request.POST.get("department")
         contact = request.POST.get("contact")
-        bank_name = request.POST.get("bank_name")
-        bank_account = request.POST.get("bank_account")
-        salary = request.POST.get("salary")
-        allowance = request.POST.get("allowance")
-        ezwich = request.POST.get("ezwich")
-        momo_number = request.POST.get("momo_number")
+        admission_date = request.POST.get("admission_date")
+        religion = request.POST.get("religion")
+        mother = request.POST.get("mother")
+        father = request.POST.get("father")
+        guardian_name = request.POST.get("guardian_name")
+        guardian_relationship = request.POST.get("guardian_relationship")
+        gender = request.POST.get("gender")
+        emergency_contact = request.POST.get("emergency_contact")
+        nonclass_activity = request.POST.get("nonclass_activity")
+        previous_health = request.POST.get("previous_health")
+        previous_school = request.POST.get("previous_school")
+        dob = request.POST.get("dob")
+        nationality = request.POST.get("nationality")
+        hometown = request.POST.get("hometown")
+        gps_address = request.POST.get("gps_address")
+        category = request.POST.get("category")
+        alt_email = request.POST.get("alt_email")
+        hostel = request.POST.get("hostel")
+        course_id = request.POST.get("course")
+        course = Courses.objects.get(id=course_id)
+        academic_tutor = request.POST.get("staff")
+        staff = CustomUser.objects.get(id=academic_tutor)
+        stage_id = request.POST.get("stage")
+        stage = Stages.objects.get(id=stage_id)
+        session_year_id = request.POST.get("session_year")
+        session_year = SessionYearModel.objects.get(id=session_year_id)
 
         profile_pic = request.FILES['profile_pic']
         fs = FileSystemStorage()
         filename = fs.save(profile_pic.name, profile_pic)
         profile_pic_url = fs.url(filename)
 
-        try:
-            user = CustomUser.objects.create_user(username=username, password=password, email=email,
-                                                  last_name=last_name, first_name=first_name, user_type=3)
-            user.employee.address = address
-            user.employee.admission_number = admission_number
-            user.employee.qualification = qualification
-            user.employee.role = role
-            user.employee.department = department
-            user.employee.contact = contact
-            user.employee.bank_name = bank_name
-            user.employee.bank_account = bank_account
-            user.employee.salary = salary
-            user.employee.allowance = allowance
-            user.employee.ezwich = ezwich
-            user.employee.momo_number = momo_number
-            user.employee.profile_pic = profile_pic_url
-            user.save()
-            messages.success(request, "Successfully Added Employee")
-            return HttpResponseRedirect(reverse("add_employee"))
-        except:
-            messages.error(request, "Failed to Add Employee")
-            return HttpResponseRedirect(reverse("add_employee"))
+        #try:
+        user = CustomUser.objects.create_user(username=username, password=password, email=email,
+                                              last_name=last_name, first_name=first_name, user_type=3)
+        user.student.address = address
+        user.student.admission_number = admission_number
+        user.student.admission_date = admission_date
+        user.student.religion = religion
+        user.student.mother = mother
+        user.student.contact = contact
+        user.student.father = father
+        user.student.guardian_name = guardian_name
+        user.student.guardian_relationship = guardian_relationship
+        user.student.gps_address = gps_address
+        user.student.gender = gender
+        user.student.hometown = hometown
+        user.student.hostel = hostel
+        user.student.nationality = nationality
+        user.student.nonclass_activity = nonclass_activity
+        user.student.previous_health = previous_health
+        user.student.previous_school = previous_school
+        user.student.dob = dob
+        user.student.category = category
+        user.student.emergency_contact = emergency_contact
+        user.student.alt_email = alt_email
+        user.student.course = course
+        user.student.stage = stage
+        user.student.staff = staff
+        user.student.session_year = session_year
+        user.student.profile_pic = profile_pic_url
+        user.save()
+        messages.success(request, "Successfully Added Student")
+        return HttpResponseRedirect(reverse("add_student"))
+        #except:
+        #    messages.error(request, "Failed to Add Student")
+        #    return HttpResponseRedirect(reverse("add_student"))
