@@ -43,45 +43,26 @@
                       </p>
                     </div>
                     <div class="row">
-                      <div class="col-md-6">
+                        <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Gender</label>
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <label class="form-group-label">
-                                <input type="radio" class="form-group-input" name="gender" id="GenderRadios1" value="" checked="">
-                                Male
-                              <i class="input-helper"></i></label>
-                            </div>
-                          </div>
-                          <div class="col-sm-5">
-                            <div class="form-group">
-                              <label class="form-group-label">
-                                <input type="radio" class="form-group-input" name="gender" id="GenderRadios2" value="option2">
-                                Female
-                              <i class="input-helper"></i></label>
-                            </div>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="gender">
+                              <option>Male</option>
+                              <option>Female</option>
+                            </select>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Category</label>
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <label class="form-group-label">
-                                <input type="radio" class="form-group-input" name="category" id="CategoryRadios1" value="" checked="">
-                                Boarding
-                              <i class="input-helper"></i></label>
-                            </div>
-                          </div>
-                          <div class="col-sm-5">
-                            <div class="form-group">
-                              <label class="form-group-label">
-                                <input type="radio" class="form-group-input" name="category" id="CategoryRadios2" value="option2">
-                                Day
-                              <i class="input-helper"></i></label>
-                            </div>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="category">
+                              <option>Boarding</option>
+                              <option>Day</option>
+                              <option>International</option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -342,21 +323,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Semester/Session</label>
-                          <div class="col-sm-9">
-                            <select class="form-control" name="session_year">
-                              {% for session_year in session_years %}
-                               <option value="{{ session_year.id }}">{{ session_year.session_start_year }} -- {{ session_year.session_start_year }}</option>
-                              {% endfor %}
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
+                          <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Class</label>
                           <div class="col-sm-9">
@@ -368,6 +335,8 @@
                           </div>
                         </div>
                       </div>
+                    </div>
+                    <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Academic Tutor</label>

@@ -139,7 +139,7 @@ class Student(models.Model):
     nationality=models.CharField(max_length=255)
     hometown=models.CharField(max_length=255)
     gps_address=models.CharField(max_length=50)
-    category=models.BooleanField(default=True)
+    category=models.CharField(max_length=50)
     alt_email=models.CharField(max_length=255)
     admission_date=models.DateField(null=True, blank=True)
     admission_number=models.CharField(max_length=50, unique=True)
@@ -149,7 +149,6 @@ class Student(models.Model):
     academic_tutor=models.ForeignKey(Staff, on_delete=models.DO_NOTHING)
     course_id=models.ForeignKey(Courses,on_delete=models.DO_NOTHING)
     stage_id=models.ForeignKey(Stages, on_delete=models.CASCADE)
-    session_year_id=models.ForeignKey(SessionYearModel,on_delete=models.CASCADE,default=1)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now_add=True)
     fcm_token=models.TextField(default="")
@@ -406,7 +405,7 @@ def create_user_profile(sender,instance,created,**kwargs):
                                    profile_pic="",gender="",contact="",emergency_contact="",nationality="",
                                    religion="",nonclass_activity="",previous_health="",previous_school="",
                                    mother="",father="",academic_tutor=Staff.objects.get(id=1),
-                                   stage_id=Stages.objects.get(id=1),hometown="",admission_number="",
+                                   stage_id=Stages.objects.get(id=1),hometown="",admission_number="",category="",
                                    gps_address="",alt_email="",hostel="",guardian_name="",guardian_relationship="")
         if instance.user_type==4:
             Parent.objects.create(admin=instance,address="",occupation="",puk="",ward_tutor=Staff.objects.get(id=1),

@@ -300,49 +300,43 @@ def add_student_save(request):
         staff = CustomUser.objects.get(id=academic_tutor)
         stage_id = request.POST.get("stage")
         stage = Stages.objects.get(id=stage_id)
-        session_year_id = request.POST.get("session_year")
-        try:
-            session_year = SessionYearModel.objects.get(id=session_year_id)
-        except SessionYearModel.DoesNotExist:
-            session_year = None
 
         profile_pic = request.FILES['profile_pic']
         fs = FileSystemStorage()
         filename = fs.save(profile_pic.name, profile_pic)
         profile_pic_url = fs.url(filename)
 
-        #try:
-        user = CustomUser.objects.create_user(username=username, password=password, email=email,
-                                              last_name=last_name, first_name=first_name, user_type=3)
-        user.student.address = address
-        user.student.admission_number = admission_number
-        user.student.admission_date = admission_date
-        user.student.religion = religion
-        user.student.mother = mother
-        user.student.contact = contact
-        user.student.father = father
-        user.student.guardian_name = guardian_name
-        user.student.guardian_relationship = guardian_relationship
-        user.student.gps_address = gps_address
-        user.student.gender = gender
-        user.student.hometown = hometown
-        user.student.hostel = hostel
-        user.student.nationality = nationality
-        user.student.nonclass_activity = nonclass_activity
-        user.student.previous_health = previous_health
-        user.student.previous_school = previous_school
-        user.student.dob = dob
-        user.student.category = category
-        user.student.emergency_contact = emergency_contact
-        user.student.alt_email = alt_email
-        user.student.course = course
-        user.student.stage = stage
-        user.student.staff = staff
-        user.student.session_year = session_year
-        user.student.profile_pic = profile_pic_url
-        user.save()
-        messages.success(request, "Successfully Added Student")
-        return HttpResponseRedirect(reverse("add_student"))
-        #except:
-        #    messages.error(request, "Failed to Add Student")
-        #    return HttpResponseRedirect(reverse("add_student"))
+        try:
+            user = CustomUser.objects.create_user(username=username, password=password, email=email,
+                                                  last_name=last_name, first_name=first_name, user_type=3)
+            user.student.address = address
+            user.student.admission_number = admission_number
+            user.student.admission_date = admission_date
+            user.student.religion = religion
+            user.student.mother = mother
+            user.student.contact = contact
+            user.student.father = father
+            user.student.guardian_name = guardian_name
+            user.student.guardian_relationship = guardian_relationship
+            user.student.gps_address = gps_address
+            user.student.gender = gender
+            user.student.hometown = hometown
+            user.student.hostel = hostel
+            user.student.nationality = nationality
+            user.student.nonclass_activity = nonclass_activity
+            user.student.previous_health = previous_health
+            user.student.previous_school = previous_school
+            user.student.dob = dob
+            user.student.category = category
+            user.student.emergency_contact = emergency_contact
+            user.student.alt_email = alt_email
+            user.student.course = course
+            user.student.stage = stage
+            user.student.staff = staff
+            user.student.profile_pic = profile_pic_url
+            user.save()
+            messages.success(request, "Successfully Added Student")
+            return HttpResponseRedirect(reverse("add_student"))
+        except:
+            messages.error(request, "Failed to Add Student")
+            return HttpResponseRedirect(reverse("add_student"))
