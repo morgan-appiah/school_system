@@ -47,5 +47,7 @@ urlpatterns = [
     path('add_stage_save', HodViews.add_stage_save, name='add_stage_save'),
     path('add_student', HodViews.add_student, name='add_student'),
     path('add_student_save', HodViews.add_student_save, name='add_student_save'),
+    path('add_parent', HodViews.add_parent, name='add_parent'),
+    path('add_parent_save', HodViews.add_parent_save, name='add_parent_save'),
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

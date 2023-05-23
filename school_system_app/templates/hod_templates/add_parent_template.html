@@ -1,0 +1,171 @@
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block main_content %}
+		<div class="container-fluid page-body-wrapper">
+			<div class="main-panel">
+
+                <div class="row">
+
+              <div class="card">
+<!--                    <div class="row">-->
+<!--                <h2><b>Add Staff</b></h2>-->
+<!--              </div>-->
+                <div class="card-body">
+                  <h4 class="card-title" align="center">Add Parent Forms</h4>
+                  <form role="form" action="/add_parent_save" method="post" enctype="multipart/form-data" class="form-sample">
+                      {% csrf_token %}
+                    <p class="card-description">
+                        <b>*Personal info</b>
+                    </p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Parent ID</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Parent ID" name="puk">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Email</label>
+                          <div class="col-sm-9">
+                            <input type="email" class="form-control" placeholder="Email" name="email">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">First Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="First Name" name="first_name">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Last Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Last Name" name="last_name">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">User Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Username" name="username">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Password</label>
+                          <div class="col-sm-9">
+                            <input type="password" class="form-control" placeholder="Password" name="password">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Address</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Address" name="address">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Contact</label>
+                          <div class="col-sm-9">
+                            <input type="tel" class="form-control" placeholder="Contact" name="contact">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Ward's Tutor</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="staff">
+                              {% for staff in staffs %}
+                               <option value="{{ staff.id }}">{{ staff.username }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Tutor Contact</label>
+                          <div class="col-sm-9">
+                            <input type="tel" class="form-control" placeholder="Enter Tutor Contact" name="tutor_contact">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Occupation</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Occupation" name="occupation">
+                          </div>
+                        </div>
+                      </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Ward's Name</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="student">
+                              {% for student in students %}
+                               <option value="{{ student.id }}">{{ student.username }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Picture</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" placeholder="Upload Image" name="profile_pic">
+                      </div>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                    {% if messages %}
+                    <div class="col-12">
+                      {% for message in messages %}
+                      {% if message.tags == 'error' %}
+                      <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% if message.tags == 'success' %}
+                      <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                      {% endif %}
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button type="reset" class="btn btn-light">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+                </div>
+                <!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+{% endblock main_content %}

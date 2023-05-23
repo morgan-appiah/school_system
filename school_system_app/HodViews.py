@@ -340,3 +340,54 @@ def add_student_save(request):
         except:
             messages.error(request, "Failed to Add Student")
             return HttpResponseRedirect(reverse("add_student"))
+        
+        
+def add_parent(request):
+    staffs=CustomUser.objects.filter(user_type=2)
+    students=CustomUser.objects.filter(user_type=3)
+    return render(request, "hod_templates/add_parent_template.html",{"staffs":staffs,"students":students})
+
+
+def add_parent_save(request):
+    if request.method != "POST":
+        return HttpResponse("Method Not Allowed")
+    else:
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        address = request.POST.get("address")
+        puk = request.POST.get("puk")
+        contact = request.POST.get("contact")
+        tutor_contact = request.POST.get("tutor_contact")
+        occupation = request.POST.get("occupation")
+        ward = request.POST.get("student")
+        student = CustomUser.objects.get(id=ward)
+        ward_tutor = request.POST.get("staff")
+        staff = CustomUser.objects.get(id=ward_tutor)
+
+        profile_pic = request.FILES['profile_pic']
+        fs = FileSystemStorage()
+        filename = fs.save(profile_pic.name, profile_pic)
+        profile_pic_url = fs.url(filename)
+
+        try:
+            user = CustomUser.objects.create_user(username=username, password=password, email=email,
+                                                  last_name=last_name, first_name=first_name, user_type=4)
+            user.parent.address = address
+            user.parent.puk = puk
+            user.parent.tutor_contact = tutor_contact
+            user.parent.occupation = occupation
+            user.parent.contact = contact
+            user.parent.student = student
+            user.parent.staff = staff
+            user.parent.profile_pic = profile_pic_url
+            user.save()
+            messages.success(request, "Successfully Added Parent")
+            return HttpResponseRedirect(reverse("add_parent"))
+        except:
+            messages.error(request, "Failed to Add Parent")
+            return HttpResponseRedirect(reverse("add_parent"))
+        
+        

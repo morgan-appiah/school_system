@@ -159,7 +159,7 @@ class Parent(models.Model):
     id=models.AutoField(primary_key=True)
     admin=models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     puk=models.CharField(max_length=50)
-    student_id=models.ForeignKey(Student, on_delete=models.CASCADE)
+    ward=models.ForeignKey(Student, on_delete=models.CASCADE, default=1)
     address=models.TextField()
     contact=models.CharField(max_length=50)
     occupation=models.CharField(max_length=100)
@@ -408,8 +408,8 @@ def create_user_profile(sender,instance,created,**kwargs):
                                    stage_id=Stages.objects.get(id=1),hometown="",admission_number="",category="",
                                    gps_address="",alt_email="",hostel="",guardian_name="",guardian_relationship="")
         if instance.user_type==4:
-            Parent.objects.create(admin=instance,address="",occupation="",puk="",ward_tutor=Staff.objects.get(id=1),
-                                  contact="",tutor_contact="",profile_pic="",student_id=Student.objects.get(id=1))
+            Parent.objects.create(admin=instance,address="",occupation="",puk="",ward=Student.objects.get(admission_number="RSS-0001-23"),
+                                  ward_tutor=Staff.objects.get(id=1),contact="",tutor_contact="",profile_pic="")
         if instance.user_type==5:
             Accounts.objects.create(admin=instance,address="",contact="",puk="",profile_pic="")
 
