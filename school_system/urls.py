@@ -49,5 +49,18 @@ urlpatterns = [
     path('add_student_save', HodViews.add_student_save, name='add_student_save'),
     path('add_parent', HodViews.add_parent, name='add_parent'),
     path('add_parent_save', HodViews.add_parent_save, name='add_parent_save'),
+    path('manage_staff', HodViews.manage_staff, name='manage_staff'),
+    path('staff_profile/<str:staff_id>', HodViews.staff_profile, name='staff_profile'),
+    path('staff_profile_save', HodViews.staff_profile_save, name='staff_profile_save'),
+
+
+
+
+
+
+
+
+
+
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from school_system_app.models import CustomUser, Courses, SessionYearModel, Subjects, Stages
+from school_system_app.models import CustomUser, Courses, SessionYearModel, Subjects, Stages, Staff
 
 
 def admin_home(request):
@@ -389,5 +389,75 @@ def add_parent_save(request):
         except:
             messages.error(request, "Failed to Add Parent")
             return HttpResponseRedirect(reverse("add_parent"))
+
+
+def manage_staff(request):
+    staffs=Staff.objects.all()
+    return render(request,"hod_templates/manage_staff_template.html",{"staffs":staffs})
         
         
+def staff_profile(request):
+    staffs=Staff.objects.all()
+    return render(request,"hod_templates/staff_profile_template.html",{"staffs":staffs})
+
+
+def staff_profile_save(request):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed</h2>")
+    else:
+        staff_id=request.POST.get("staff_id")
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        address = request.POST.get("address")
+        puk = request.POST.get("puk")
+        contact = request.POST.get("contact")
+        bank_name = request.POST.get("bank_name")
+        bank_account = request.POST.get("bank_account")
+        salary = request.POST.get("salary")
+        allowance = request.POST.get("allowance")
+        ezwich = request.POST.get("ezwich")
+        momo_number = request.POST.get("momo_number")
+
+        if request.FILES.get('profile_pic', False):
+            profile_pic = request.FILES['profile_pic']
+            fs = FileSystemStorage()
+            filename = fs.save(profile_pic.name, profile_pic)
+            profile_pic_url = fs.url(filename)
+        else:
+            profile_pic_url = None
+
+        try:
+            user = CustomUser.objects.get(id=staff_id)
+            user.username=username
+            user.password=password
+            user.email=email
+            user.last_name=last_name
+            user.first_name=first_name
+            user.save()
+
+            staff_model = Staff.objects.get(admin=staff_id)
+            staff_model.address = address
+            staff_model.puk = puk
+            staff_model.contact = contact
+            staff_model.bank_name = bank_name
+            staff_model.bank_account = bank_account
+            staff_model.salary = salary
+            staff_model.allowance = allowance
+            staff_model.ezwich = ezwich
+            staff_model.momo_number = momo_number
+
+            if profile_pic_url != None:
+                staff_model.profile_pic = profile_pic_url
+
+            staff_model.save()
+            messages.success(request,"Successfully Edited Staff")
+            return HttpResponseRedirect(reverse("staff_profile",kwargs={"staff_id":staff_id}))
+        except:
+            messages.error(request,"Failed to Edit Staff")
+            return HttpResponseRedirect(reverse("staff_profile",kwargs={"staff_id":staff_id}))
+
+
+
