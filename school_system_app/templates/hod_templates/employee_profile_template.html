@@ -13,8 +13,7 @@
     <meta name="description"
         content="Flexy Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Flexy Admin Lite Template by WrapPixel</title>
-    <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
+    <title>Employee Full Profile</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon.png'%}">
     <!-- Custom CSS -->
@@ -105,14 +104,11 @@
                                 href="/admin_home" aria-expanded="false"><i
                                     class="mdi mdi-account-network"></i><span class="hide-menu">Admin Home Page</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="/manage_staff" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
-                                    class="hide-menu">Manage Staff</span></a></li>
+                                href="/manage_employee" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
+                                    class="hide-menu">Manage Employee</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="/edit_staff/{{ staff.admin.id }}" aria-expanded="false"><i class="mdi mdi-face"></i><span
-                                    class="hide-menu">Edit Staff</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="error-404.html" aria-expanded="false"><i class="mdi mdi-alert-outline"></i><span
-                                    class="hide-menu">404</span></a></li>
+                                href="/edit_employee/{{ employee.admin.id }}" aria-expanded="false"><i class="mdi mdi-face"></i><span
+                                    class="hide-menu">Edit Employee</span></a></li>
                     </ul>
 
                 </nav>
@@ -135,10 +131,10 @@
                     <div class="col-6">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0 d-flex align-items-center">
-                              <li class="breadcrumb-item"><a href="/manage_staff" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
+                              <li class="breadcrumb-item"><a href="/manage_employee" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
                             </ol>
                           </nav>
-                        <h1 class="mb-0 fw-bold" align="left">{{ staff.admin.username }}'s Profile</h1>
+                        <h1 class="mb-0 fw-bold" align="left">{{ employee.admin.username }}'s Profile</h1>
                     </div>
                 </div>
             </div>
@@ -158,19 +154,19 @@
                     <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
                             <div class="card-body">
-                                <center class="m-t-30"> <img src="{{ staff.profile_pic }}"
+                                <center class="m-t-30"> <img src="{{ employee.profile_pic }}"
                                         class="rounded-circle" width="150" />
-                                    <h4 class="card-title m-t-10">{{ staff.admin.username }}</h4>
-                                    <h6 class="card-subtitle">{{ staff.puk }}</h6>
+                                    <h4 class="card-title m-t-10">{{ employee.admin.username }}</h4>
+                                    <h6 class="card-subtitle">{{ employee.puk }}</h6>
                                 </center>
                             </div>
                             <div>
                                 <hr>
                             </div>
                             <div class="card-body"> <small class="text-muted">Email address </small>
-                                <h6>{{ staff.admin.email }}</h6> <small class="text-muted p-t-30 db">Phone</small>
-                                <h6>{{ staff.contact }}</h6> <small class="text-muted p-t-30 db">Address</small>
-                                <h6>{{ staff.address }}</h6>
+                                <h6>{{ employee.admin.email }}</h6> <small class="text-muted p-t-30 db">Phone</small>
+                                <h6>{{ employee.contact }}</h6> <small class="text-muted p-t-30 db">Address</small>
+                                <h6>{{ employee.address }}</h6>
                                <small class="text-muted p-t-30 db">Social Profile</small>
                                 <br />
                                 <button class="btn btn-circle btn-secondary"><i class="fab fa-facebook-f"></i></button>
@@ -186,75 +182,89 @@
                             <div class="card-body">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Staff Details</h3>
+                <h3 class="card-title">Employee Details</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <strong> Staff ID </strong>
+                <strong> Employee ID </strong>
 
-                <p class="text-muted">{{ staff.puk }}</p>
+                <p class="text-muted">{{ employee.puk }}</p>
 
                 <hr>
 
                 <strong> Full Name</strong>
 
                 <p class="text-muted">
-                    {{ staff.admin.username }}
+                    {{ employee.admin.username }}
                 </p>
 
                 <hr>
 
                 <strong> Email </strong>
 
-                <p class="text-muted">{{ staff.admin.email }}</p>
+                <p class="text-muted">{{ employee.admin.email }}</p>
 
                 <hr>
 
                 <strong> Address </strong>
 
-                <p class="text-muted">{{ staff.address }}</p>
+                <p class="text-muted">{{ employee.address }}</p>
 
                 <hr>
 
                   <strong> Contact </strong>
 
-                <p class="text-muted">{{ staff.contact }}</p>
+                <p class="text-muted">{{ employee.contact }}</p>
+
+                <hr>
+
+                <strong> Qualifications </strong>
+
+                <p class="text-muted">{{ employee.qualification }}</p>
+
+                <hr>   <strong> Role </strong>
+
+                <p class="text-muted">{{ employee.role }}</p>
+
+                <hr>   <strong> Department </strong>
+
+                <p class="text-muted">{{ employee.department }}</p>
 
                 <hr>
 
                   <strong> Bank </strong>
 
-                <p class="text-muted">{{ staff.bank_name }}</p>
+                <p class="text-muted">{{ employee.bank_name }}</p>
 
                 <hr>
 
                   <strong> Account Number </strong>
 
-                <p class="text-muted">{{ staff.bank_account }}</p>
+                <p class="text-muted">{{ employee.bank_account }}</p>
 
                 <hr>
 
                   <strong> Salary </strong>
 
-                <p class="text-muted">{{ staff.salary }}</p>
+                <p class="text-muted">{{ employee.salary }}</p>
 
                 <hr>
 
                   <strong> Allowance </strong>
 
-                <p class="text-muted">{{ staff.allowance }}</p>
+                <p class="text-muted">{{ employee.allowance }}</p>
 
                 <hr>
 
                   <strong> E-Zwich Number </strong>
 
-                <p class="text-muted">{{ staff.ezwich }}</p>
+                <p class="text-muted">{{ employee.ezwich }}</p>
 
                 <hr>
 
                   <strong> MoMo Number </strong>
 
-                <p class="text-muted">{{ staff.momo_number }}</p>
+                <p class="text-muted">{{ employee.momo_number }}</p>
 
                 <hr>
 
@@ -270,7 +280,7 @@
 
                 <hr>
                   <div class="col-sm-12">
-                      <button class="btn btn-success text-white"><a href="/edit_staff/{{ staff.admin.id }}"class="link"  >Update Profile</a></button>
+                      <button class="btn btn-success text-white"><a href="/edit_employee/{{ employee.admin.id }}"class="link"  >Update Profile</a></button>
                   </div>
               </div>
               </div>

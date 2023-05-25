@@ -51,8 +51,12 @@ urlpatterns = [
     path('add_parent_save', HodViews.add_parent_save, name='add_parent_save'),
     path('manage_staff', HodViews.manage_staff, name='manage_staff'),
     path('staff_profile/<str:staff_id>', HodViews.staff_profile, name='staff_profile'),
-    path('staff_profile_save', HodViews.staff_profile_save, name='staff_profile_save'),
-
+    path('edit_staff/<str:staff_id>', HodViews.edit_staff,name="edit_staff"),
+    path('edit_staff_save', HodViews.edit_staff_save,name="edit_staff_save"),
+    path('manage_employee', HodViews.manage_employee, name='manage_employee'),
+    path('employee_profile/<str:employee_id>', HodViews.employee_profile, name='employee_profile'),
+    path('edit_employee/<str:employee_id>', HodViews.edit_employee, name="edit_employee"),
+    path('edit_employee_save', HodViews.edit_employee_save, name="edit_employee_save"),
 
 
 

@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from school_system_app.models import CustomUser, Courses, SessionYearModel, Subjects, Stages, Staff
+from school_system_app.models import CustomUser, Courses, SessionYearModel, Subjects, Stages, Staff, Employee
 
 
 def admin_home(request):
@@ -394,14 +394,19 @@ def add_parent_save(request):
 def manage_staff(request):
     staffs=Staff.objects.all()
     return render(request,"hod_templates/manage_staff_template.html",{"staffs":staffs})
-        
-        
-def staff_profile(request):
-    staffs=Staff.objects.all()
-    return render(request,"hod_templates/staff_profile_template.html",{"staffs":staffs})
 
 
-def staff_profile_save(request):
+def staff_profile(request, staff_id):
+    staff = Staff.objects.get(admin=staff_id)
+    return render(request, "hod_templates/staff_profile_template.html", {"staff": staff, "id": staff_id})
+
+
+def edit_staff(request, staff_id):
+    staff=Staff.objects.get(admin=staff_id)
+    return render(request,"hod_templates/edit_staff_template.html",{"staff":staff,"id":staff_id})
+
+
+def edit_staff_save(request):
     if request.method!="POST":
         return HttpResponse("<h2>Method Not Allowed</h2>")
     else:
@@ -454,10 +459,89 @@ def staff_profile_save(request):
 
             staff_model.save()
             messages.success(request,"Successfully Edited Staff")
-            return HttpResponseRedirect(reverse("staff_profile",kwargs={"staff_id":staff_id}))
+            return HttpResponseRedirect(reverse("edit_staff",kwargs={"staff_id":staff_id}))
         except:
             messages.error(request,"Failed to Edit Staff")
-            return HttpResponseRedirect(reverse("staff_profile",kwargs={"staff_id":staff_id}))
+            return HttpResponseRedirect(reverse("edit_staff",kwargs={"staff_id":staff_id}))
 
 
 
+
+def manage_employee(request):
+    employees=Employee.objects.all()
+    return render(request,"hod_templates/manage_employee_template.html",{"employees":employees})
+
+
+def employee_profile(request, employee_id):
+    employee = Employee.objects.get(admin=employee_id)
+    return render(request, "hod_templates/employee_profile_template.html", {"employee": employee, "id": employee_id})
+
+
+def edit_employee(request, employee_id):
+    employee = Employee.objects.get(admin=employee_id)
+    return render(request, "hod_templates/edit_employee_template.html", {"employee": employee, "id": employee_id})
+
+
+def edit_employee_save(request):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed</h2>")
+    else:
+        employee_id=request.POST.get("employee_id")
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        address = request.POST.get("address")
+        puk = request.POST.get("puk")
+        qualification = request.POST.get("qualification")
+        role = request.POST.get("role")
+        department = request.POST.get("department")
+        contact = request.POST.get("contact")
+        bank_name = request.POST.get("bank_name")
+        bank_account = request.POST.get("bank_account")
+        salary = request.POST.get("salary")
+        allowance = request.POST.get("allowance")
+        ezwich = request.POST.get("ezwich")
+        momo_number = request.POST.get("momo_number")
+
+        if request.FILES.get('profile_pic', False):
+            profile_pic = request.FILES['profile_pic']
+            fs = FileSystemStorage()
+            filename = fs.save(profile_pic.name, profile_pic)
+            profile_pic_url = fs.url(filename)
+        else:
+            profile_pic_url = None
+
+        try:
+            user = CustomUser.objects.get(id=employee_id)
+            user.username=username
+            user.password=password
+            user.email=email
+            user.last_name=last_name
+            user.first_name=first_name
+            user.save()
+
+            employee_model = Staff.objects.get(admin=employee_id)
+            employee_model.address = address
+            employee_model.puk = puk
+            employee_model.qualification = qualification
+            employee_model.role = role
+            employee_model.department = department
+            employee_model.contact = contact
+            employee_model.bank_name = bank_name
+            employee_model.bank_account = bank_account
+            employee_model.salary = salary
+            employee_model.allowance = allowance
+            employee_model.ezwich = ezwich
+            employee_model.momo_number = momo_number
+
+            if profile_pic_url != None:
+                employee_model.profile_pic = profile_pic_url
+
+            employee_model.save()
+            messages.success(request,"Successfully Edited Employee")
+            return HttpResponseRedirect(reverse("edit_employee",kwargs={"employee_id":employee_id}))
+        except:
+            messages.error(request,"Failed to Edit Employee")
+            return HttpResponseRedirect(reverse("edit_employee",kwargs={"employee_id":employee_id}))
