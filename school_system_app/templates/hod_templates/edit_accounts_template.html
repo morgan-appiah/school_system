@@ -1,0 +1,186 @@
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block main_content %}
+		<div class="container-fluid page-body-wrapper">
+			<div class="main-panel">
+
+                <div class="row">
+
+              <div class="card">
+<!--                    <div class="row">-->
+<!--                <h2><b>Add Staff</b></h2>-->
+<!--              </div>-->
+                <div class="card-body">
+                  <h4 class="card-title" align="center">Update Accountant Details</h4>
+                  <form role="form" action="/edit_accounts_save" method="post" enctype="multipart/form-data" class="form-sample">
+                      {% csrf_token %}
+                    <p class="card-description">
+                        <b>*Personal info</b>
+                    </p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Staff ID</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Staff ID" name="puk">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Email</label>
+                          <div class="col-sm-9">
+                            <input type="email" class="form-control" placeholder="Email" name="email">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">First Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="First Name" name="first_name">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Last Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Last Name" name="last_name">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">User Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Username" name="username">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Password</label>
+                          <div class="col-sm-9">
+                            <input type="password" class="form-control" placeholder="Password" name="password">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Address</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Address" name="address">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Contact</label>
+                          <div class="col-sm-9">
+                            <input type="tel" class="form-control" placeholder="Contact" name="contact">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Picture</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" placeholder="Upload Image" name="profile_pic">
+                      </div>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                    <p class="card-description">
+                        <b>*Transactional info</b>
+                    </p>
+                    </div>
+                     <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Bank</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Bank Name" name="bank_name">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Account Number</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Acc... Number" name="bank_account">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">E-Zwich</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="E-Zwich Number" name="ezwich">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">MoMo</label>
+                          <div class="col-sm-9">
+                            <input type="tel" class="form-control" placeholder="Mobile Money Number" name="momo_number">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Salary</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Salary Amount" name="salary">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Allowance</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Allowance" name="allowance">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                    {% if messages %}
+                    <div class="col-12">
+                      {% for message in messages %}
+                      {% if message.tags == 'error' %}
+                      <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% if message.tags == 'success' %}
+                      <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                      {% endif %}
+                    <button type="submit" class="btn btn-primary me-2">Update</button>
+                    <button type="reset" class="btn btn-light">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+                </div>
+                <!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+{% endblock main_content %}

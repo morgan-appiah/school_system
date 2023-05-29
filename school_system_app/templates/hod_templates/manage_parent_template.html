@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block main_content %}
+		<div class="container-fluid page-body-wrapper">
+			<div class="main-panel">
+
+                <div class="row">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title" align="center">Parent Details</h4>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th><b>Parent ID</b></th>
+                          <th><b>Picture</b></th>
+                          <th><b>First Name</b></th>
+                          <th><b>Last Name</b></th>
+                          <th><b>Username</b></th>
+                          <th><b>Email</b></th>
+                          <th><b>Address</b></th>
+                          <th><b>Contact</b></th>
+                          <th><b>Last Login</b></th>
+                          <th><b>Date Joined</b></th>
+                          <th><b>Full Profile</b></th>
+                          <th><b>Delete</b></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                       {% for parent in parents %}
+                      <tr>
+                        <td>{{ parent.puk }}</td>
+                        <td><img src="{{ parent.profile_pic }}"/></td>
+                        <td>{{ parent.admin.first_name }}</td>
+                        <td>{{ parent.admin.last_name }}</td>
+                        <td>{{ parent.admin.username }}</td>
+                        <td>{{ parent.admin.email }}</td>
+                        <td>{{ parent.address }}</td>
+                        <td>{{ parent.contact }}</td>
+                        <td>{{ parent.admin.last_login }}</td>
+                        <td>{{ parent.admin.date_joined }}</td>
+                        <td><a href="{% url 'parent_profile' parent_id=parent.admin.id %}"><label class="badge badge-success">see profile</label></a></td>
+                        <td><a href="/delete_parent"><label class="badge badge-danger">Delete</label></a></td>
+                    </tr>
+                  {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+                </div>
+            </div>
+        </div>
+{% endblock main_content %}

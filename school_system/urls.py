@@ -57,6 +57,14 @@ urlpatterns = [
     path('employee_profile/<str:employee_id>', HodViews.employee_profile, name='employee_profile'),
     path('edit_employee/<str:employee_id>', HodViews.edit_employee, name="edit_employee"),
     path('edit_employee_save', HodViews.edit_employee_save, name="edit_employee_save"),
+    path('manage_parent', HodViews.manage_parent, name='manage_parent'),
+    path('parent_profile/<str:parent_id>', HodViews.parent_profile, name='parent_profile'),
+    path('edit_parent/<str:parent_id>', HodViews.edit_parent, name="edit_parent"),
+    path('edit_parent_save', HodViews.edit_parent_save, name="edit_parent_save"),
+    path('manage_accounts', HodViews.manage_accounts, name='manage_accounts'),
+    path('accounts_profile/<str:accounts_id>', HodViews.accounts_profile, name='accounts_profile'),
+    path('edit_accounts/<str:accounts_id>', HodViews.edit_accounts, name="edit_accounts"),
+    path('edit_accounts_save', HodViews.edit_accounts_save, name="edit_accounts_save"),
 
 
 

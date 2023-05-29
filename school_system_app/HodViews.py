@@ -4,7 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from school_system_app.models import CustomUser, Courses, SessionYearModel, Subjects, Stages, Staff, Employee
+from school_system_app.models import CustomUser, Courses, SessionYearModel, Subjects, Stages, Staff, Employee, Parent, \
+    Student, Accounts
 
 
 def admin_home(request):
@@ -545,3 +546,149 @@ def edit_employee_save(request):
         except:
             messages.error(request,"Failed to Edit Employee")
             return HttpResponseRedirect(reverse("edit_employee",kwargs={"employee_id":employee_id}))
+
+
+
+def manage_parent(request):
+    parents=Parent.objects.all()
+    return render(request,"hod_templates/manage_parent_template.html",{"parents":parents})
+
+
+def parent_profile(request, parent_id):
+    parent = Parent.objects.get(admin=parent_id)
+    return render(request, "hod_templates/parent_profile_template.html", {"parent": parent, "id": parent_id})
+
+
+def edit_parent(request, parent_id):
+    parent = Parent.objects.get(admin=parent_id)
+    return render(request, "hod_templates/edit_parent_template.html", {"parent": parent, "id": parent_id})
+
+
+def edit_parent_save(request, parent_id):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed</h2>")
+    else:
+        parent_id=request.POST.get("parent_id")
+        staff_id=request.POST.get("ward_tutor")
+        student_id=request.POST.get("ward")
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        address = request.POST.get("address")
+        puk = request.POST.get("puk")
+        contact = request.POST.get("contact")
+        tutor_contact = request.POST.get("tutor_contact")
+        occupation = request.POST.get("occupation")
+        student = CustomUser.objects.get(id=student_id)
+        staff = CustomUser.objects.get(id=staff_id)
+
+
+        if request.FILES.get('profile_pic', False):
+            profile_pic = request.FILES['profile_pic']
+            fs = FileSystemStorage()
+            filename = fs.save(profile_pic.name, profile_pic)
+            profile_pic_url = fs.url(filename)
+        else:
+            profile_pic_url = None
+
+        try:
+            user = CustomUser.objects.get(id=parent_id)
+            user.username=username
+            user.password=password
+            user.email=email
+            user.last_name=last_name
+            user.first_name=first_name
+            user.save()
+
+            parent_model = Parent.objects.get(admin=parent_id)
+            parent_model.address = address
+            parent_model.puk = puk
+            parent_model.tutor_contact = tutor_contact
+            parent_model.occupation = occupation
+            parent_model.student_id = student
+            parent_model.contact = contact
+            parent_model.staff_id = staff
+
+            if profile_pic_url != None:
+                parent_model.profile_pic = profile_pic_url
+
+            parent_model.save()
+            messages.success(request,"Successfully Edited Parent")
+            return HttpResponseRedirect(reverse("edit_parent",kwargs={"parent_id":parent_id, "staff_id":staff_id, "student_id":student_id}))
+        except:
+            messages.error(request,"Failed to Edit Parent")
+            return HttpResponseRedirect(reverse("edit_parent",kwargs={"parent_id":parent_id, "staff_id":staff_id, "student_id":student_id}))
+
+
+
+def manage_accounts(request):
+    accounts=Accounts.objects.all()
+    return render(request,"hod_templates/manage_accounts_template.html",{"accounts":accounts})
+
+
+def accounts_profile(request, accounts_id):
+    account = Accounts.objects.get(admin=accounts_id)
+    return render(request, "hod_templates/accounts_profile_template.html", {"account": account, "id": accounts_id})
+
+
+def edit_accounts(request, accounts_id):
+    account = Accounts.objects.get(admin=accounts_id)
+    return render(request, "hod_templates/edit_accounts_template.html", {"account": account, "id": accounts_id})
+
+
+def edit_accounts_save(request):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed</h2>")
+    else:
+        accounts_id=request.POST.get("accounts_id")
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        address = request.POST.get("address")
+        puk = request.POST.get("puk")
+        contact = request.POST.get("contact")
+
+     
+
+        if request.FILES.get('profile_pic', False):
+            profile_pic = request.FILES['profile_pic']
+            fs = FileSystemStorage()
+            filename = fs.save(profile_pic.name, profile_pic)
+            profile_pic_url = fs.url(filename)
+        else:
+            profile_pic_url = None
+
+        try:
+            user = CustomUser.objects.get(id=accounts_id)
+            user.username=username
+            user.password=password
+            user.email=email
+            user.last_name=last_name
+            user.first_name=first_name
+            user.save()
+
+            accounts_model = Staff.objects.get(admin=accounts_id)
+            accounts_model.address = address
+            accounts_model.puk = puk
+            accounts_model.contact = contact
+       
+
+            if profile_pic_url != None:
+                accounts_model.profile_pic = profile_pic_url
+
+            accounts_model.save()
+            messages.success(request,"Successfully Edited Accountant")
+            return HttpResponseRedirect(reverse("edit_accounts",kwargs={"accounts_id":accounts_id}))
+        except:
+            messages.error(request,"Failed to Edit Accountant")
+            return HttpResponseRedirect(reverse("edit_accounts",kwargs={"accounts_id":accounts_id}))
+
+
+
+
+
+
