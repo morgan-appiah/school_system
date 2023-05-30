@@ -11,11 +11,14 @@
 <!--                <h2><b>Add Staff</b></h2>-->
 <!--              </div>-->
                 <div class="card-body">
-                  <h4 class="card-title" align="center">Update Parent Forms</h4>
+                  <h4 class="card-title" align="center" style="margin-top:40px"><button type="button" class="btn btn-primary btn-rounded btn-fw"><b>{{ parent.admin.username }}</b> | <b>{{ parent.puk }}</b></button>/h4>
                   <form role="form" action="/edit_parent_save" method="post" enctype="multipart/form-data" class="form-sample">
                       {% csrf_token %}
-                    <p class="card-description">
-                        <b>*Personal info</b>
+                    <p class="card-description" style="margin-top:30px">
+                        <button type="button" class="btn btn-info btn-rounded btn-icon">
+                        <i class="mdi mdi-star"></i>
+                      </button>
+                      <b>Personal info</b>
                     </p>
                     <div class="row">
                       <div class="col-md-6">

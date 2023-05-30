@@ -556,7 +556,9 @@ def manage_parent(request):
 
 def parent_profile(request, parent_id):
     parent = Parent.objects.get(admin=parent_id)
-    return render(request, "hod_templates/parent_profile_template.html", {"parent": parent, "id": parent_id})
+    staff=CustomUser.objects.filter(user_type=2)
+    student=CustomUser.objects.filter(user_type=3)
+    return render(request, "hod_templates/parent_profile_template.html", {"parent": parent, "id": parent_id, "staff":staff, "student":student})
 
 
 def edit_parent(request, parent_id):
@@ -569,8 +571,8 @@ def edit_parent_save(request, parent_id):
         return HttpResponse("<h2>Method Not Allowed</h2>")
     else:
         parent_id=request.POST.get("parent_id")
-        staff_id=request.POST.get("ward_tutor")
-        student_id=request.POST.get("ward")
+        staff_id=request.POST.get("staff")
+        student_id=request.POST.get("student")
         first_name = request.POST.get("first_name")
         last_name = request.POST.get("last_name")
         username = request.POST.get("username")
@@ -581,8 +583,7 @@ def edit_parent_save(request, parent_id):
         contact = request.POST.get("contact")
         tutor_contact = request.POST.get("tutor_contact")
         occupation = request.POST.get("occupation")
-        student = CustomUser.objects.get(id=student_id)
-        staff = CustomUser.objects.get(id=staff_id)
+
 
 
         if request.FILES.get('profile_pic', False):
@@ -607,8 +608,10 @@ def edit_parent_save(request, parent_id):
             parent_model.puk = puk
             parent_model.tutor_contact = tutor_contact
             parent_model.occupation = occupation
+            student = Student.objects.get(id=student_id)
             parent_model.student_id = student
             parent_model.contact = contact
+            staff = Staff.objects.get(id=staff_id)
             parent_model.staff_id = staff
 
             if profile_pic_url != None:
@@ -616,10 +619,10 @@ def edit_parent_save(request, parent_id):
 
             parent_model.save()
             messages.success(request,"Successfully Edited Parent")
-            return HttpResponseRedirect(reverse("edit_parent",kwargs={"parent_id":parent_id, "staff_id":staff_id, "student_id":student_id}))
+            return HttpResponseRedirect(reverse("edit_parent",kwargs={"parent_id":parent_id}))
         except:
             messages.error(request,"Failed to Edit Parent")
-            return HttpResponseRedirect(reverse("edit_parent",kwargs={"parent_id":parent_id, "staff_id":staff_id, "student_id":student_id}))
+            return HttpResponseRedirect(reverse("edit_parent",kwargs={"parent_id":parent_id}))
 
 
 

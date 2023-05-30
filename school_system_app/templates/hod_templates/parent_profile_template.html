@@ -220,15 +220,19 @@
 
                 <strong> Assigned Tutor </strong>
 
-                <p class="text-muted">{{ parent.staff }}</p>
+                <p class="text-muted">{{ parent.staff_id.username }}</p>
 
-                <hr>   <strong> Tutor's Contact </strong>
+                <hr>
 
-                <p class="text-muted">{{ parent.tutor_contact }}</p>
+                  <strong> Tutor's Contact </strong>
 
-                <hr>   <strong> Ward/s </strong>
+                <p class="text-muted">{{ parent.staff_id.contact }}</p>
 
-                <p class="text-muted">{{ parent.student }}</p>
+                <hr>
+
+                  <strong> Ward </strong>
+
+                <p class="text-muted">{{ parent.student_id.username }}</p>
 
                 <hr>
 
@@ -238,17 +242,6 @@
 
                 <hr>
 
-                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                <p class="text-muted">
-                  <span class="tag tag-danger">UI Design</span>
-                  <span class="tag tag-success">Coding</span>
-                  <span class="tag tag-info">Javascript</span>
-                  <span class="tag tag-warning">PHP</span>
-                  <span class="tag tag-primary">Node.js</span>
-                </p>
-
-                <hr>
                   <div class="col-sm-12">
                       <button class="btn btn-success text-white"><a href="/edit_parent/{{ parent.admin.id }}"class="link"  >Update Profile</a></button>
                   </div>

@@ -7,15 +7,15 @@
                 <div class="row">
 
               <div class="card">
-<!--                    <div class="row">-->
-<!--                <h2><b>Add Staff</b></h2>-->
-<!--              </div>-->
                 <div class="card-body">
-                  <h4 class="card-title" align="center">Update Subject Details</h4>
+                  <h4 class="card-title" align="center"><button type="button" class="btn btn-primary btn-rounded btn-fw"><b>Update Subject Details</b></button></h4>
                   <form class="forms-sample" action="/edit_subject_save" method="post" >
                        {% csrf_token %}
-                       <p class="card-description">
-                        <b>*Enter Data for Various Subjects</b>
+                       <p class="card-description" style="margin-top:40px">
+                      <button type="button" class="btn btn-info btn-rounded btn-icon">
+                        <i class="mdi mdi-star"></i>
+                      </button>
+                        <b>Enter Data for Various Subjects</b>
                     </p>
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Subject ID</label>
