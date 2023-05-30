@@ -1,0 +1,378 @@
+{% extends 'hod_templates/base_template.html' %}
+{% load static %}
+{% block main_content %}
+		<div class="container-fluid page-body-wrapper">
+			<div class="main-panel">
+
+                <div class="row">
+
+              <div class="card">
+<!--                    <div class="row">-->
+<!--                <h2><b>Add Staff</b></h2>-->
+<!--              </div>-->
+                <div class="card-body">
+                    <h3 class="card-title" align="center"><b><u>Update Student Forms</u></b></h3>
+                  <form role="form" action="/edit_student_save" method="post" enctype="multipart/form-data" class="form-sample">
+                      {% csrf_token %}
+                   <div class="form-group row">
+                      <p class="card-description">
+                        <b>*Admission Info</b>
+                      </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row" >
+                          <label class="col-sm-3 col-form-label">Admission ID</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Admission ID...." name="admission_number">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Admission Date</label>
+                          <div class="col-sm-9">
+                            <input type="date" class="form-control" placeholder="Admission Date" name="admission_date">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row" style="margin-top:60px">
+                      <p class="card-description">
+                        <b>*Biographic Data</b>
+                      </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Gender</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="gender">
+                              <option>Male</option>
+                              <option>Female</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Category</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="category">
+                              <option>Boarding</option>
+                              <option>Day</option>
+                              <option>International</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">First Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter First Name" name="first_name">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Last Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Last Name" name="last_name">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">User Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Username" name="username">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Password</label>
+                          <div class="col-sm-9">
+                            <input type="password" class="form-control" placeholder="Enter Password" name="password">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Address</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Address" name="address">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Email</label>
+                          <div class="col-sm-9">
+                            <input type="email" class="form-control" placeholder="Enter Email...." name="email">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Date of Birth</label>
+                          <div class="col-sm-9">
+                            <input type="date" class="form-control" placeholder="Enter Date of Birth...." name="dob">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Nationality</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Nationality...." name="nationality">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Picture</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" placeholder="Upload Image" name="profile_pic">
+                      </div>
+                      </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Religion</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="religion">
+                              <option>Christianity</option>
+                              <option>Islam</option>
+                              <option>Traditional</option>
+                              <option>Others</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row" style="margin-top:60px">
+                    <p class="card-description">
+                        <b>*Guardian info</b>
+                    </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Father Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Father Name" name="father">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Mother Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Mother Name" name="mother">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Guardian Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Guardian Name" name="guardian_name">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Guardian Relation</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Guardian Relation..." name="guardian_relationship">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="form-group row" style="margin-top:60px">
+                    <p class="card-description">
+                        <b>*Contact/Location info</b>
+                    </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Personal Email</label>
+                          <div class="col-sm-9">
+                            <input type="email" class="form-control" placeholder="Enter Email" name="alt_email">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">GPS Address</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Address...." name="gps_address">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Home Town</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Home Town" name="hometown">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Address Line 1</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Address Line 1" name="address">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Contact</label>
+                          <div class="col-sm-9">
+                            <input type="tel" class="form-control" placeholder="Enter Contact" name="contact">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Emergency Contact</label>
+                          <div class="col-sm-9">
+                            <input type="tel" class="form-control" placeholder="Emergency Contact" name="emergency_contact">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Hostel/Residence of Accommodation</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Current Place of Stay" name="hostel">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row" style="margin-top:60px">
+                        <p class="card-description">
+                            <b>*Additional Info</b>
+                        </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Health Issues</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Associated Health Issues" name="previous_health">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Extra Curricular Activities</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Any Extra Curricular Interests" name="nonclass_activity">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Previous School</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter Recent School Attended...." name="previous_school">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row" style="margin-top:60px">
+                        <p class="card-description">
+                            <b>*Academic Info</b>
+                        </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Programme/Course</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="course">
+                              {% for course in courses %}
+                               <option value="{{ course.id }}">{{ course.course_name }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Class</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="stage">
+                              {% for stage in stages %}
+                               <option value="{{ stage.id }}">{{ stage.stage_name }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Academic Tutor</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="staff">
+                              {% for staff in staffs %}
+                              <option value="{{ staff.id }}">{{ staff.first_name }} {{ staff.last_name }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                    {% if messages %}
+                    <div class="col-12">
+                      {% for message in messages %}
+                      {% if message.tags == 'error' %}
+                      <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% if message.tags == 'success' %}
+                      <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                      {% endif %}
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button type="reset" class="btn btn-light">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+                </div>
+                <!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+{% endblock main_content %}

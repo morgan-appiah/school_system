@@ -688,7 +688,246 @@ def edit_accounts_save(request):
             return HttpResponseRedirect(reverse("edit_accounts",kwargs={"accounts_id":accounts_id}))
 
 
+def manage_student(request):
+    students=Student.objects.all()
+    return render(request,"hod_templates/manage_student_template.html",{"students":students})
 
 
+def student_profile(request, student_id):
+    student = Student.objects.get(admin=student_id)
+    courses = Courses.objects.all()
+    stage = Stages.objects.all()
+    staffs = CustomUser.objects.filter(user_type=2)
+    return render(request, "hod_templates/student_profile_template.html", {"student":student, "id":student_id,"staffs":staffs,"courses":courses,"stage":stage})
 
+
+def edit_student(request, student_id):
+    student=Student.objects.get(admin=student_id)
+    return render(request, "hod_templates/edit_student_template.html", {"student":student, "id":student_id})
+
+
+def edit_student_save(request):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed</h2>")
+    else:
+        student_id=request.POST.get("student_id")
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        address = request.POST.get("address")
+        admission_number = request.POST.get("admission_number")
+        contact = request.POST.get("contact")
+        admission_date = request.POST.get("admission_date")
+        religion = request.POST.get("religion")
+        mother = request.POST.get("mother")
+        father = request.POST.get("father")
+        guardian_name = request.POST.get("guardian_name")
+        guardian_relationship = request.POST.get("guardian_relationship")
+        gender = request.POST.get("gender")
+        emergency_contact = request.POST.get("emergency_contact")
+        nonclass_activity = request.POST.get("nonclass_activity")
+        previous_health = request.POST.get("previous_health")
+        previous_school = request.POST.get("previous_school")
+        dob = request.POST.get("dob")
+        nationality = request.POST.get("nationality")
+        hometown = request.POST.get("hometown")
+        gps_address = request.POST.get("gps_address")
+        category = request.POST.get("category")
+        alt_email = request.POST.get("alt_email")
+        hostel = request.POST.get("hostel")
+        staff_id = request.POST.get("staff")
+        course_id = request.POST.get("course")
+        stage_id = request.POST.get("stage")
+
+        if request.FILES.get('profile_pic', False):
+            profile_pic = request.FILES['profile_pic']
+            fs = FileSystemStorage()
+            filename = fs.save(profile_pic.name, profile_pic)
+            profile_pic_url = fs.url(filename)
+        else:
+            profile_pic_url = None
+
+        try:
+            user = CustomUser.objects.get(id=student_id)
+            user.username=username
+            user.password=password
+            user.email=email
+            user.last_name=last_name
+            user.first_name=first_name
+            user.save()
+
+            student_model = Student.objects.get(admin=student_id)
+            student_model.address = address
+            student_model.admission_number = admission_number
+            student_model.contact = contact
+            student_model.admission_date = admission_date
+            student_model.religion = religion
+            student_model.mother = mother
+            student_model.father = father
+            student_model.guardian_name = guardian_name
+            student_model.guardian_relationship = guardian_relationship
+            student_model.gender = gender
+            student_model.emergency_contact = emergency_contact
+            student_model.nonclass_activity = nonclass_activity
+            student_model.previous_health = previous_health
+            student_model.previous_school = previous_school
+            student_model.dob = dob
+            student_model.nationality = nationality
+            student_model.hometown = hometown
+            student_model.gps_address = gps_address
+            student_model.category = category
+            student_model.alt_email = alt_email
+            student_model.hostel = hostel
+            staff = CustomUser.objects.get(id=staff_id)
+            student_model.staff_id = staff
+            course = Courses.objects.get(id=course_id)
+            student_model.course_id = course
+            stage = Stages.objects.get(id=stage_id)
+            student_model.stage_id = stage
+
+            if profile_pic_url != None:
+                student_model.profile_pic = profile_pic_url
+
+            student_model.save()
+            messages.success(request,"Successfully Edited Student")
+            return HttpResponseRedirect(reverse("edit_student",kwargs={"student_id":student_id}))
+        except:
+            messages.error(request,"Failed to Edit Student")
+            return HttpResponseRedirect(reverse("edit_student",kwargs={"student_id":student_id}))
+
+
+def manage_session(request):
+    sessions=SessionYearModel.objects.all()
+    return render(request,"hod_templates/manage_session_template.html",{"sessions":sessions})
+
+
+def edit_session(request,session_id):
+    session=SessionYearModel.objects.get(id=session_id)
+    return render(request,"hod_templates/edit_session_template.html",{"session":session,"id":session_id})
+
+def edit_session_save(request):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed</h2>")
+    else:
+        session_id=request.POST.get("session_id")
+        semester_name = request.POST.get("semester_name")
+        session_start_year = request.POST.get("session_start_year")
+        session_end_year = request.POST.get("session_end_year")
+
+        try:
+            session=SessionYearModel.objects.get(id=session_id)
+            print(SessionYearModel.semester_name)
+            session.semester_name=semester_name
+            session.session_start_year=session_start_year
+            session.session_end_year=session_end_year
+            session.save()
+            messages.success(request,"Successfully Edited Session Year")
+            return HttpResponseRedirect(reverse("edit_session",kwargs={"session_id":session_id}))
+        except:
+            messages.error(request,"Failed to Edit Session Year")
+            return HttpResponseRedirect(reverse("edit_session",kwargs={"session_id":session_id}))
+
+
+def manage_course(request):
+    courses=Courses.objects.all()
+    return render(request,"hod_templates/manage_course_template.html",{"courses":courses})
+
+
+def edit_course(request,course_id):
+    course=Courses.objects.get(id=course_id)
+    return render(request,"hod_templates/edit_course_template.html",{"course":course,"id":course_id})
+
+def edit_course_save(request):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed</h2>")
+    else:
+        course_id=request.POST.get("course_id")
+        puk = request.POST.get("puk")
+        course_name = request.POST.get("course_name")
+
+        try:
+            course=Courses.objects.get(id=course_id)
+            print(Courses.course_name)
+            course.puk=puk
+            course.course_name=course_name
+            course.save()
+            messages.success(request,"Successfully Edited Course")
+            return HttpResponseRedirect(reverse("edit_course",kwargs={"course_id":course_id}))
+        except:
+            messages.error(request,"Failed to Edit Course")
+            return HttpResponseRedirect(reverse("edit_course",kwargs={"course_id":course_id}))
+
+
+def manage_subject(request):
+    subjects=Subjects.objects.all()
+    return render(request,"hod_templates/manage_subject_template.html",{"subjects":subjects})
+
+def edit_subject(request,subject_id):
+    subject=Subjects.objects.get(id=subject_id)
+    courses=Courses.objects.all()
+    staff=CustomUser.objects.filter(user_type=2)
+    return render(request,"hod_templates/edit_subject_template.html",{"subject":subject,"staff":staff,"courses":courses,"id":subject_id})
+
+def edit_subject_save(request):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed</h2>")
+    else:
+        subject_id=request.POST.get("subject_id")
+        puk=request.POST.get("puk")
+        subject_name=request.POST.get("subject_name")
+        staff_id=request.POST.get("staff")
+        course_id=request.POST.get("course")
+
+        try:
+            subject=Subjects.objects.get(id=subject_id)
+            subject.puk=puk
+            subject.subject_name=subject_name
+            staff=CustomUser.objects.get(id=staff_id)
+            subject.staff_id=staff
+            course=Courses.objects.get(id=course_id)
+            subject.course_id=course
+            subject.save()
+
+            messages.success(request,"Successfully Edited Subject")
+            return HttpResponseRedirect(reverse("edit_subject",kwargs={"subject_id":subject_id}))
+        except:
+            messages.error(request,"Failed to Edit Subject")
+            return HttpResponseRedirect(reverse("edit_subject",kwargs={"subject_id":subject_id}))
+
+
+def manage_stage(request):
+    stages=Stages.objects.all()
+    return render(request,"hod_templates/manage_stage_template.html",{"stages":stages})
+
+def edit_stage(request,stage_id):
+    stage=Stages.objects.get(id=stage_id)
+    courses=Courses.objects.all()
+    staff=CustomUser.objects.filter(user_type=2)
+    return render(request,"hod_templates/edit_subject_template.html",{"stage":stage,"staff":staff,"courses":courses,"id":stage_id})
+
+def edit_stage_save(request):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed</h2>")
+    else:
+        stage_id=request.POST.get("stage_id")
+        stage_name=request.POST.get("stage_name")
+        staff_id=request.POST.get("staff")
+        course_id=request.POST.get("course")
+
+        try:
+            stage=Stages.objects.get(id=stage_id)
+            stage.stage_name=stage_name
+            staff=CustomUser.objects.get(id=staff_id)
+            stage.staff_id=staff
+            course=Courses.objects.get(id=course_id)
+            stage.course_id=course
+            stage.save()
+
+            messages.success(request,"Successfully Edited Class")
+            return HttpResponseRedirect(reverse("edit_stage",kwargs={"stage_id":stage_id}))
+        except:
+            messages.error(request,"Failed to Edit Stage")
+            return HttpResponseRedirect(reverse("edit_stage",kwargs={"stage_id":stage_id}))
 

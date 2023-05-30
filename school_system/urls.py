@@ -65,7 +65,22 @@ urlpatterns = [
     path('accounts_profile/<str:accounts_id>', HodViews.accounts_profile, name='accounts_profile'),
     path('edit_accounts/<str:accounts_id>', HodViews.edit_accounts, name="edit_accounts"),
     path('edit_accounts_save', HodViews.edit_accounts_save, name="edit_accounts_save"),
-
+    path('manage_student', HodViews.manage_student, name='manage_student'),
+    path('student_profile/<str:student_id>', HodViews.student_profile, name='student_profile'),
+    path('edit_student/<str:student_id>', HodViews.edit_student, name="edit_student"),
+    path('edit_student_save', HodViews.edit_student_save, name="edit_student_save"),
+    path('manage_session', HodViews.manage_session, name='manage_session'),
+    path('edit_session/<str:session_id>', HodViews.edit_session, name="edit_session"),
+    path('edit_session_save', HodViews.edit_session_save, name="edit_session_save"),
+    path('manage_course', HodViews.manage_course, name='manage_course'),
+    path('edit_course/<str:course_id>', HodViews.edit_course, name="edit_course"),
+    path('edit_course_save', HodViews.edit_course_save, name="edit_course_save"),
+    path('manage_subject', HodViews.manage_subject, name='manage_subject'),
+    path('edit_subject/<str:subject_id>', HodViews.edit_subject, name="edit_subject"),
+    path('edit_subject_save', HodViews.edit_subject_save, name="edit_subject_save"),
+    path('manage_stage', HodViews.manage_stage, name='manage_stage'),
+    path('edit_stage/<str:stage_id>', HodViews.edit_stage, name="edit_stage"),
+    path('edit_stage_save', HodViews.edit_stage_save, name="edit_stage_save"),
 
 
 

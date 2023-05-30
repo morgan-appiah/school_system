@@ -1,0 +1,409 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, student dashboard, admin, student profile">
+    <meta name="description"
+        content="A full page dedicated to students profile of School Management System">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Student Profile</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon.png'%}">
+    <!-- Custom CSS -->
+    <link href="{% static 'dist/css/style.min.css'%}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+  <body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <div class="navbar-header" data-logobg="skin6">
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+                            class="ti-menu ti-close"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-end">
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
+                                    My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i>
+                                    My Balance</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
+                                    Inbox</a>
+                            </ul>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/" aria-expanded="false"><i
+                                    class="mdi mdi-account-network"></i><span class="hide-menu">Home</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/admin_home" aria-expanded="false"><i
+                                    class="mdi mdi-account-network"></i><span class="hide-menu">Admin Home Page</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/manage_student" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
+                                    class="hide-menu">Manage Students</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/edit_student/{{ student.admin.id }}" aria-expanded="false"><i class="mdi mdi-face"></i><span
+                                    class="hide-menu">Edit Students</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="error-404.html" aria-expanded="false"><i class="mdi mdi-alert-outline"></i><span
+                                    class="hide-menu">404</span></a></li>
+                    </ul>
+
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0 d-flex align-items-center">
+                              <li class="breadcrumb-item"><a href="/manage_student" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
+                            </ol>
+                          </nav>
+                        <h1 class="mb-0 fw-bold" align="left">{{ student.admin.username }}'s Profile</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <center class="m-t-30"> <img src="{{ student.profile_pic }}"
+                                        class="rounded-circle" width="150" />
+                                    <h4 class="card-title m-t-10">{{ student.admin.username }}</h4>
+                                    <h6 class="card-subtitle">{{ student.puk }}</h6>
+                                </center>
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+                            <div class="card-body"> <small class="text-muted">Email address </small>
+                                <h6>{{ student.admin.email }}</h6> <small class="text-muted p-t-30 db">Phone</small>
+                                <h6>{{ student.contact }}</h6> <small class="text-muted p-t-30 db">Address</small>
+                                <h6>{{ student.address }}</h6>
+                               <small class="text-muted p-t-30 db">Social Profile</small>
+                                <br />
+                                <button class="btn btn-circle btn-secondary"><i class="fab fa-facebook-f"></i></button>
+                                <button class="btn btn-circle btn-secondary"><i class="fab fa-twitter"></i></button>
+                                <button class="btn btn-circle btn-secondary"><i class="fab fa-instagram"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <div class="card">
+                            <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Students Details</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong> Student ID </strong>
+
+                <p class="text-muted">{{ student.admission_number }}</p>
+
+                <hr>
+
+                <strong> Full Name</strong>
+
+                <p class="text-muted">
+                    {{ student.admin.username }}
+                </p>
+
+                <hr>
+
+                <strong> Email </strong>
+
+                <p class="text-muted">{{ student.admin.email }}</p>
+
+                <hr>
+
+                <strong> Address </strong>
+
+                <p class="text-muted">{{ student.address }}</p>
+
+                <hr>
+
+                  <strong> Contact </strong>
+
+                <p class="text-muted">{{ student.contact }}</p>
+
+                <hr>
+
+                  <strong> Admission Date </strong>
+
+                <p class="text-muted">{{ student.admission_date }}</p>
+
+                <hr>
+
+                  <strong> Religion </strong>
+
+                <p class="text-muted">{{ student.religion }}</p>
+
+                <hr>
+
+                  <strong> Mother </strong>
+
+                <p class="text-muted">{{ student.mother }}</p>
+
+                <hr>
+
+                  <strong> Father </strong>
+
+                <p class="text-muted">{{ student.father }}</p>
+
+                <hr>
+
+                  <strong> Guardian Name </strong>
+
+                <p class="text-muted">{{ student.guardian_name }}</p>
+
+                <hr>
+
+                  <strong> Guardian Relation </strong>
+
+                <p class="text-muted">{{ student.guardian_relationship }}</p>
+
+                <hr>
+
+                  <strong> Gender </strong>
+
+                <p class="text-muted">{{ student.gender }}</p>
+
+                <hr>
+
+                  <strong> Emergency Contact </strong>
+
+                <p class="text-muted">{{ student.emergency_contact }}</p>
+
+                <hr>
+
+                <strong> Extra Curricular Activities </strong>
+
+                <p class="text-muted">{{ student.nonclass_activity }}</p>
+
+                <hr>
+
+                <strong> Health Records </strong>
+
+                <p class="text-muted">{{ student.previous_health }}</p>
+
+                <hr>
+
+                  <strong> Previous School </strong>
+
+                <p class="text-muted">{{ student.previous_school }}</p>
+
+                <hr>
+
+                  <strong> Date of Birth </strong>
+
+                <p class="text-muted">{{ student.dob }}</p>
+
+                <hr>
+
+                  <strong> Nationality </strong>
+
+                <p class="text-muted">{{ student.nationality }}</p>
+
+                <hr>
+
+                  <strong> Hometown </strong>
+
+                <p class="text-muted">{{ student.hometown }}</p>
+
+                <hr>
+
+                  <strong> GPS Address </strong>
+
+                <p class="text-muted">{{ student.gps_address }}</p>
+
+                <hr>
+
+                  <strong> Category </strong>
+
+                <p class="text-muted">{{ student.category }}</p>
+
+                <hr>
+
+                  <strong> Personal Email </strong>
+
+                <p class="text-muted">{{ student.alt_email }}</p>
+
+                <hr>
+
+                  <strong> Hostel </strong>
+
+                <p class="text-muted">{{ student.hostel }}</p>
+
+                <hr>
+
+                  <strong> Course </strong>
+
+                <p class="text-muted">{{ student.course_id.course_name }}</p>
+
+                <hr>
+
+
+                  <strong> Academic Tutor </strong>
+
+                <p class="text-muted">{{ student.staff_id.username }}</p>
+
+                <hr>
+
+                  <strong> Class </strong>
+
+                <p class="text-muted">{{ student.stage_id.stage_name }}</p>
+
+                <hr>
+                  <div class="col-sm-12">
+                      <button class="btn btn-success text-white"><a href="/edit_student/{{ student.admin.id }}"class="link"  >Update Profile</a></button>
+                  </div>
+              </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- Row -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{% static 'assets/libs/jquery/dist/jquery.min.js'%}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'dist/js/app-style-switcher.js'%}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'dist/js/waves.js'%}"></script>
+    <!--Menu sidebar -->
+    <script src="{% static 'dist/js/sidebarmenu.js'%}"></script>
+    <!--Custom JavaScript -->
+    <script src="{% static 'dist/js/custom.js'%}"></script>
+</body>
+                <!-- partial -->
+</html>

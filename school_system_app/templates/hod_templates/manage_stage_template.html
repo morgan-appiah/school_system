@@ -7,28 +7,28 @@
                 <div class="row">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title" align="center">Session Year Details</h4>
+                  <h4 class="card-title" align="center" style="margin-top:60px">|Class Details|</h4>
                   <div class="table-responsive">
                     <table class="table table-hover">
                       <thead>
                         <tr>
                           <th><b>ID</b></th>
-                          <th><b>Session Name</b></th>
-                          <th><b>Start Date</b></th>
-                          <th><b>End Date</b></th>
+                          <th><b>Class Name</b></th>
+                            <th><b>Course</b></th>
+                          <th><b>Staff Name</b></th>
                           <th><b>Action</b></th>
                           <th><b>Delete</b></th>
                         </tr>
                       </thead>
                       <tbody>
-                       {% for session in sessions %}
+                       {% for stage in stages %}
                       <tr>
-                        <td>{{ session.id }}</td>
-                        <td>{{ session.semester_name }}</td>
-                        <td>{{ session.session_start_year }}</td>
-                        <td>{{ session.session_end_year }}</td>
-                        <td><a href="{% url 'edit_session' session_id=session.id %}"><label class="badge badge-success">Edit</label></a></td>
-                        <td><a href="/delete_session"><label class="badge badge-danger">Delete</label></a></td>
+                        <td>{{ stage.id }}</td>
+                        <td>{{ stage.stage_name }}</td>
+                        <td>{{ stage.course_id.course_name }}</td>
+                        <td>{{ stage.staff_id.first_name }} {{ stage.staff_id.last_name }}</td>
+                        <td><a href="{% url 'edit_stage' stage_id=stage.id %}"><label class="badge badge-success">Edit</label></a></td>
+                        <td><a href="/delete_stage"><label class="badge badge-danger">Delete</label></a></td>
                     </tr>
                   {% endfor %}
                       </tbody>
