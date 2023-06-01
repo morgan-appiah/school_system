@@ -6,8 +6,8 @@
     th {
       border-top: 0;
       border-bottom-width: 1px;
-      font-weight: 500;
-      font-size: 1rem;
+      font-weight: bold;
+      font-size: .875rem;
       i {
         margin-left: 0.325rem;
       }
@@ -17,6 +17,8 @@
   td {
     vertical-align: middle;
     line-height: 1;
+    white-space: nowrap;
+    padding: $table-cell-padding;
   }
   td {
     font-size: $default-font-size;
@@ -39,6 +41,14 @@
   }
   &.table-bordered {
     border-top: 1px solid $border-color;
+  }
+  &.table-hover {
+    thead,
+      tbody {
+        tr {
+          cursor: pointer;
+        }
+      }
   }
 }
 .table > :not(:last-child) > :last-child > *, .jsgrid .jsgrid-table > :not(:last-child) > :last-child > * {

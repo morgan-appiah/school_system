@@ -21,7 +21,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
 from school_system import settings
-from school_system_app import views, HodViews
+from school_system_app import views, HodViews, StudentViews, StaffViews, EmployeeViews, AccountsViews, ParentViews
 
 urlpatterns = [
     path('', views.ShowLandPage),
@@ -83,21 +83,21 @@ urlpatterns = [
     path('edit_stage_save', HodViews.edit_stage_save, name="edit_stage_save"),
 
 
-# STAFF URL
+                # STAFF URLs
+    path('staff_home', StaffViews.staff_home, name='staff_home'),
+
+                # STUDENT URLs
+    path('student_home', StudentViews.student_home, name='student_home'),
+
+                # PARENT URLs
+    path('parent_home', ParentViews.parent_home, name='parent_home'),
+
+                # ACCOUNTS URLs
+    path('accounts_home', AccountsViews.accounts_home, name='accounts_home'),
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+                # EMPLOYEE URLs
+    path('employee_home', EmployeeViews.employee_home, name='employee_home'),
 
 
 
