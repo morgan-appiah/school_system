@@ -40,7 +40,7 @@
                         <td>{{ parent.admin.last_login }}</td>
                         <td>{{ parent.admin.date_joined }}</td>
                         <td><a href="{% url 'parent_profile' parent_id=parent.admin.id %}"><label class="badge badge-success">see profile</label></a></td>
-                        <td><a href="/delete_parent"><label class="badge badge-danger">Delete</label></a></td>
+                        <td><a href="{% url 'delete_parent' parent_id=parent.admin.id %}"><label class="badge badge-danger">Delete</label></a></td>
                     </tr>
                   {% endfor %}
                       </tbody>

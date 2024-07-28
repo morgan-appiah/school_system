@@ -32,7 +32,7 @@
                         <td>{{ subject.course_id.id }}</td>
                         <td>{{ subject.staff_id.first_name }} {{ subject.staff_id.last_name }}</td>
                         <td><a href="{% url 'edit_subject' subject_id=subject.id %}"><label class="badge badge-success">Edit</label></a></td>
-                        <td><a href="/delete_subject"><label class="badge badge-danger">Delete</label></a></td>
+                        <td><a href="{% url 'delete_subject' subject_id=subject.id %}"><label class="badge badge-danger">Delete</label></a></td>
                     </tr>
                   {% endfor %}
                       </tbody>

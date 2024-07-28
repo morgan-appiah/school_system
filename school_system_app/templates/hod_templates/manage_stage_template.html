@@ -28,7 +28,7 @@
                         <td>{{ stage.course_id.course_name }}</td>
                         <td>{{ stage.staff_id.first_name }} {{ stage.staff_id.last_name }}</td>
                         <td><a href="{% url 'edit_stage' stage_id=stage.id %}"><label class="badge badge-success">Edit</label></a></td>
-                        <td><a href="/delete_stage"><label class="badge badge-danger">Delete</label></a></td>
+                        <td><a href="{% url 'delete_stage' stage_id=stage.id %}"><label class="badge badge-danger">Delete</label></a></td>
                     </tr>
                   {% endfor %}
                       </tbody>

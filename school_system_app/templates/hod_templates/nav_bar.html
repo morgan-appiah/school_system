@@ -115,8 +115,8 @@
               </li>
             </ul>
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="{% static '/admin_home'%}"><h3><b>Administrators Portal</b></h3></a>
-                <a class="navbar-brand brand-logo-mini" href="{% static '/admin_home'%}"><h3><b>Administrators Portal</b></h3></a>
+                <a class="navbar-brand brand-logo" href="{% url 'admin_home'%}"><h3><b><button type="button" class="btn btn-outline-primary btn-fw">Administrators Portal</button></b></h3></a>
+                <a class="navbar-brand brand-logo-mini" href="{% url 'admin_home'%}"><h3><b><button type="button" class="btn btn-outline-primary btn-fw">Administrators Portal</button></b></h3></a>
             </div>
             <ul class="navbar-nav navbar-nav-right">
                 <li class="nav-item dropdown d-lg-flex d-none">
@@ -170,50 +170,50 @@
 
 
               <li class="nav-item">
-                  <a href="/admin_home" class="nav-link">
+                  <a href="{% url 'admin_home' %}" class="nav-link">
                     <i class="mdi mdi-account-plus menu-icon"></i>
                     <span class="menu-title">Add Modules</span>
                     <i class="menu-arrow"></i>
                   </a>
                   <div class="submenu">
                       <ul class="submenu-item">
-                          <li class="nav-item"><a class="nav-link" href="/add_session">Add Session</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/add_staff">Add Staff</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/add_course">Add Courses</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/add_subject">Add Subjects</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/add_stage">Add Classes</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/add_student">Add Student</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/add_parent">Add Parent</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/add_employee">Add Employees</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/add_accounts">Add Accounts</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'add_session' %}">Add Session</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'add_staff' %}">Add Staff</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'add_course' %}">Add Courses</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'add_subject' %}">Add Subjects</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'add_stage' %}">Add Classes</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'add_student' %}">Add Student</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'add_parent' %}">Add Parent</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'add_employee' %}">Add Employees</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'add_accounts' %}">Add Accounts</a></li>
                       </ul>
                   </div>
               </li>
 
               <li class="nav-item">
-                  <a href="/admin_home" class="nav-link">
+                  <a href="{% url 'admin_home' %}" class="nav-link">
                     <i class="mdi mdi-database menu-icon"></i>
                     <span class="menu-title">Database</span>
                     <i class="menu-arrow"></i>
                   </a>
                   <div class="submenu">
                       <ul class="submenu-item">
-                          <li class="nav-item"><a class="nav-link" href="/manage_session">Session</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/manage_staff">Staff</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/manage_course">Courses</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/manage_subject">Subjects</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/manage_stage">Classes</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/manage_student">Student</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/manage_parent">Parent</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/manage_employee">Employees</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/manage_accounts">Accountants</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'manage_session' %}">Session</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'manage_staff' %}">Staff</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'manage_course' %}">Courses</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'manage_subject' %}">Subjects</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'manage_stage' %}">Classes</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'manage_student' %}">Student</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'manage_parent' %}">Parent</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'manage_employee' %}">Employees</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'manage_accounts' %}">Accountants</a></li>
                       </ul>
                   </div>
               </li>
 
 
               <li class="nav-item">
-                  <a href="/admin_home" class="nav-link">
+                  <a href="{% url 'admin_home' %}" class="nav-link">
                     <i class="mdi mdi-account-circle menu-icon"></i>
                     <span class="menu-title">Accounts</span>
                     <i class="menu-arrow"></i>
@@ -231,7 +231,7 @@
 
 
               <li class="nav-item">
-                  <a href="/admin_home" class="nav-link">
+                  <a href="{% url 'admin_home' %}"  class="nav-link">
                     <i class="mdi mdi-message-processing menu-icon"></i>
                     <span class="menu-title">Notifications</span>
                     <i class="menu-arrow"></i>
@@ -249,7 +249,7 @@
 
 
               <li class="nav-item">
-                  <a href="/admin_home" class="nav-link">
+                  <a href="{% url 'admin_home' %}"  class="nav-link">
                     <i class="mdi mdi-reply-all menu-icon"></i>
                     <span class="menu-title">Requests</span>
                     <i class="menu-arrow"></i>
@@ -267,7 +267,7 @@
 
 
               <li class="nav-item">
-                  <a href="/admin_home" class="nav-link">
+                  <a href="{% url 'admin_home' %}"  class="nav-link">
                     <i class="mdi mdi-flattr menu-icon"></i>
                     <span class="menu-title">FeedBack</span>
                     <i class="menu-arrow"></i>

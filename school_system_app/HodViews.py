@@ -566,7 +566,7 @@ def edit_parent(request, parent_id):
     return render(request, "hod_templates/edit_parent_template.html", {"parent": parent, "id": parent_id})
 
 
-def edit_parent_save(request, parent_id):
+def edit_parent_save(request):
     if request.method!="POST":
         return HttpResponse("<h2>Method Not Allowed</h2>")
     else:
@@ -584,8 +584,6 @@ def edit_parent_save(request, parent_id):
         tutor_contact = request.POST.get("tutor_contact")
         occupation = request.POST.get("occupation")
 
-
-
         if request.FILES.get('profile_pic', False):
             profile_pic = request.FILES['profile_pic']
             fs = FileSystemStorage()
@@ -594,35 +592,32 @@ def edit_parent_save(request, parent_id):
         else:
             profile_pic_url = None
 
-        try:
-            user = CustomUser.objects.get(id=parent_id)
-            user.username=username
-            user.password=password
-            user.email=email
-            user.last_name=last_name
-            user.first_name=first_name
-            user.save()
-
-            parent_model = Parent.objects.get(admin=parent_id)
-            parent_model.address = address
-            parent_model.puk = puk
-            parent_model.tutor_contact = tutor_contact
-            parent_model.occupation = occupation
-            student = Student.objects.get(id=student_id)
-            parent_model.student_id = student
-            parent_model.contact = contact
-            staff = Staff.objects.get(id=staff_id)
-            parent_model.staff_id = staff
-
-            if profile_pic_url != None:
-                parent_model.profile_pic = profile_pic_url
-
-            parent_model.save()
-            messages.success(request,"Successfully Edited Parent")
-            return HttpResponseRedirect(reverse("edit_parent",kwargs={"parent_id":parent_id}))
-        except:
-            messages.error(request,"Failed to Edit Parent")
-            return HttpResponseRedirect(reverse("edit_parent",kwargs={"parent_id":parent_id}))
+        #try:
+        user = CustomUser.objects.get(id=parent_id)
+        user.username=username
+        user.password=password
+        user.email=email
+        user.last_name=last_name
+        user.first_name=first_name
+        user.save()
+        parent_model = Parent.objects.get(admin=parent_id)
+        parent_model.address = address
+        parent_model.puk = puk
+        parent_model.tutor_contact = tutor_contact
+        parent_model.occupation = occupation
+        student = Student.objects.get(id=student_id)
+        parent_model.student_id = student
+        parent_model.contact = contact
+        staff = Staff.objects.get(id=staff_id)
+        parent_model.staff_id = staff
+        if profile_pic_url != None:
+            parent_model.profile_pic = profile_pic_url
+        parent_model.save()
+        messages.success(request,"Successfully Edited Parent")
+        return HttpResponseRedirect(reverse("edit_parent",kwargs={"parent_id":parent_id}))
+        #except:
+        #    messages.error(request,"Failed to Edit Parent")
+        #    return HttpResponseRedirect(reverse("edit_parent",kwargs={"parent_id":parent_id}))
 
 
 
@@ -933,4 +928,106 @@ def edit_stage_save(request):
         except:
             messages.error(request,"Failed to Edit Stage")
             return HttpResponseRedirect(reverse("edit_stage",kwargs={"stage_id":stage_id}))
+
+
+def delete_staff(request, staff_id):
+    staff = Staff.objects.get(admin=staff_id)
+    try:
+        staff.delete()
+        messages.success(request, "Staff Deleted Successfully")
+        return HttpResponseRedirect(reverse("manage_staff"))
+    except:
+        messages.error(request, "Failed To Delete Staff")
+        return HttpResponseRedirect(reverse("manage_staff"))
+
+
+def delete_employee(request, employee_id):
+    employee = Employee.objects.get(admin=employee_id)
+    try:
+        employee.delete()
+        messages.success(request, "Employee Deleted Successfully")
+        return HttpResponseRedirect(reverse("manage_employee"))
+    except:
+        messages.error(request, "Failed To Delete Employee")
+        return HttpResponseRedirect(reverse("manage_employee"))
+    
+      
+def delete_parent(request, parent_id):
+    parent = Parent.objects.get(admin=parent_id)
+    try:
+        parent.delete()
+        messages.success(request, "Parent Deleted Successfully")
+        return HttpResponseRedirect(reverse("manage_parent"))
+    except:
+        messages.error(request, "Failed To Delete Parent")
+        return HttpResponseRedirect(reverse("manage_parent"))
+
+
+def delete_accounts(request, accounts_id):
+    accounts = Accounts.objects.get(admin=accounts_id)
+    try:
+        accounts.delete()
+        messages.success(request, "Accountant Deleted Successfully")
+        return HttpResponseRedirect(reverse("manage_accounts"))
+    except:
+        messages.error(request, "Failed To Delete Accountant")
+        return HttpResponseRedirect(reverse("manage_accounts"))
+    
+    
+def delete_student(request, student_id):
+    student = Student.objects.get(admin=student_id)
+    try:
+        student.delete()
+        messages.success(request, "Student Deleted Successfully")
+        return HttpResponseRedirect(reverse("manage_student"))
+    except:
+        messages.error(request, "Failed To Delete Student")
+        return HttpResponseRedirect(reverse("manage_student"))
+    
+    
+def delete_course(request, course_id):
+    course = Courses.objects.get(id=course_id)
+    try:
+        course.delete()
+        messages.success(request, "Course Deleted Successfully")
+        return HttpResponseRedirect(reverse("manage_course"))
+    except:
+        messages.error(request, "Failed To Delete Course")
+        return HttpResponseRedirect(reverse("manage_course"))
+    
+    
+def delete_subject(request, subject_id):
+    subject = Subjects.objects.get(id=subject_id)
+    try:
+        subject.delete()
+        messages.success(request, "Subject Deleted Successfully")
+        return HttpResponseRedirect(reverse("manage_subject"))
+    except:
+        messages.error(request, "Failed To Delete Subject")
+        return HttpResponseRedirect(reverse("manage_subject"))
+    
+    
+def delete_stage(request, stage_id):
+    stage = Stages.objects.get(id=stage_id)
+    try:
+        stage.delete()
+        messages.success(request, "Class Deleted Successfully")
+        return HttpResponseRedirect(reverse("manage_stage",kwargs={"stage_id":stage_id}))
+    except:
+        messages.error(request, "Failed To Delete Class")
+        return HttpResponseRedirect(reverse("manage_stage",kwargs={"stage_id":stage_id}))
+    
+    
+def delete_session(request, session_id):
+    session = SessionYearModel.objects.get(id=session_id)
+    try:
+        session.delete()
+        messages.success(request, "Session Year Deleted Successfully")
+        return HttpResponseRedirect(reverse("manage_session"))
+    except:
+        messages.error(request, "Failed To Delete Session Year")
+        return HttpResponseRedirect(reverse("manage_session"))
+    
+    
+    
 

@@ -40,7 +40,7 @@
                         <td>{{ employee.admin.last_login }}</td>
                         <td>{{ employee.admin.date_joined }}</td>
                         <td><a href="{% url 'employee_profile' employee_id=employee.admin.id %}"><label class="badge badge-success">see profile</label></a></td>
-                        <td><a href="/delete_employee"><label class="badge badge-danger">Delete</label></a></td>
+                        <td><a href="{% url 'delete_employee' employee_id=employee.admin.id %}"><label class="badge badge-danger">Delete</label></a></td>
                     </tr>
                   {% endfor %}
                       </tbody>
